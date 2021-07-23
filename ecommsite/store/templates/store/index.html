@@ -14,8 +14,23 @@
 <body>
     <div class="container">
         <div class="row">
+            <div class="col-md-12">
+                <form class="card card-sm">
+                    <div class="card-body row no-gutters align-item-center">
+                        <div class="col">
+                            <input type="search" name='item_name' placeholder="Search for products" class="form-control form-control-borderless">
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-success" type="submit">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <br>
+        <div class="row">
             {% for product in item %}
-            <div class="col">
+            <div class="col-md-3">
                 <div class="card">
                     <img src="{{product.image}}" class="card-img-top">
                     <div class="card-body">
@@ -31,10 +46,35 @@
                             <span class="a-price-symbol">₹</span>
                             {{product.price}}
                         </div>
+
+                        <a href="/{{ product.id }}" class="btn btn-warning">View</a>
+                        <a class="btn btn-warning">Add to cart</a>
                     </div>
                 </div>
             </div>
             {% endfor %}
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 offset-md-4">
+                <ul class="pagination">
+                    {% if item.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ item.previous_page_number }}">Previous</a>
+                        </li>
+                    {% endif %}
+
+                    <li class="page-item active">
+                        <a class="page-link" href="?page={{ item.number }}">Current</a>
+                    </li>
+
+                    {% if item.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ item.next_page_number }}">Next</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
     </div>
 </body>
