@@ -1,0 +1,24 @@
+.product-title{
+    font-weight: 700;
+}
+
+.product-disc_price{
+    color: #B12704;
+    font-weight: 600;
+    font-size: 21px;
+}
+
+.product-price{
+    color: grey;
+    font-size: 15px;
+}
+
+.a-letter-space {
+    display: inline-block;
+    width: .385em;
+}
+
+.a-price-symbol {
+    top: -.5em;
+    font-size: 12px;
+}
