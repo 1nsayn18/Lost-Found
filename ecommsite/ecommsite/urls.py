@@ -22,9 +22,10 @@ from store import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
-    path('<int:id>/', views.detail, name='detail')
+    path('<int:id>/', views.detail, name='detail'),
+    path('checkout/', views.checkout, name='checkout'),
 ]
 
 # urlpatterns = [
 #     # ... the rest of your URLconf goes here ...
-# ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
+# ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) j
