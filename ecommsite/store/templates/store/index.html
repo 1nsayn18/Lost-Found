@@ -12,32 +12,32 @@
     </head>
 <body>
     {% block body %}
-        <div class="row">
+        <div class="row" style="margin: 10px;">
             {% for product in item %}
-            <div class="col-md-2">
-                <div class="card">
-                    <img src="{{product.image}}" class="card-img-top">
+            <div class="col-md-3">
+                <div class="card" style="height: 555px; margin-top: 15px;">
+                    <img src="{{product.image}}" style="height: 355px; padding-top: 1px; padding-left: 60px; padding-right: 60px;">
                     <div class="card-body">
-                        <div id = "nm{{product.id}}" class="product-title">{{product.name}}</div>
-                        <span class="a-letter-space"></span>
-                        <div id="price{{product.id}}"class="product-disc_price">{{product.discount_price}}</div>
-                        <div class="product-price" style = "text-decoration:line-through;">
+                        <div id = "nm{{product.id}}" class="product-title" style="height: 50px; margin: 5px;">{{product.name}}</div>
+                        <div id="price{{product.id}}"class="product-disc_price" style="margin-top: 5px; margin-left: 5px; margin-right: 5px;">{{product.discount_price}}</div>
+                        <div class="product-price" style = "text-decoration:line-through; margin-bottom: 5px; margin-left: 5px; margin-right: 5px;">
                             <span class="a-price-symbol">₹</span>
                             {{product.price}}
                         </div>
-                        <a href="/{{ product.id }}" class="btn btn-warning">View</a>
-                        <button id="{{ product.id }}" class="btn btn-warning atc">Add to cart</button>
+                        <div class="buttons">
+                            <a href="/{{ product.id }}" class="btn btn-warning">View</a>
+                            <button id="{{ product.id }}" class="btn btn-warning atc">Add to cart</button>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
             {% endfor %}
         </div>
-        
-        <span class="a-letter-space"></span>
 
-        <div class="row">
-            <div class="col-md-2 offset-md-5">
-                <ul class="pagination">
+        <div class="row" >
+            <div class="col" >
+                <ul class="pagination" style="justify-content: center; align-items: center;">
                     {% if item.has_previous %}
                         <li class="page-item">
                             <a class="page-link" href="?page={{ item.previous_page_number }}">Previous</a>
