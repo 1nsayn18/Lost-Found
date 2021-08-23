@@ -11,7 +11,7 @@ def index(request):
     #search code
     item_name = request.GET.get('item_name')
     if item_name != '' and item_name is not None:
-        item = item.filter(name__icontains = item_name)     
+        item = item.filter(name__icontains = item_name) | item.filter(category__icontains = item_name)      
 
     #paginator code
     paginator = Paginator(item, 8)
@@ -26,7 +26,7 @@ def detail(request, id):
     items = product.objects.all()
     item_name = request.GET.get('item_name')
     if item_name != '' and item_name is not None:
-        items = items.filter(name__icontains = item_name) 
+        item = item.filter(name__icontains = item_name) | item.filter(category__icontains = item_name) 
         return render(request, 'store/index.html', {'item':items}) 
 
     return render(request, 'store/detail.html', {'item':item})
@@ -36,7 +36,7 @@ def checkout(request):
 
     item_name = request.GET.get('item_name')
     if item_name != '' and item_name is not None:
-        item = item.filter(name__icontains = item_name) 
+        item = item.filter(name__icontains = item_name) | item.filter(category__icontains = item_name) 
         return render(request, 'store/index.html', {'item':item}) 
 
     if request.method == "POST":
