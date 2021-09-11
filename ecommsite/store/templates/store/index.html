@@ -1,61 +1,62 @@
-{% extends 'store/base.html' %}
-{% load static %}
+{% extends 'store/base.html' %} {% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <link rel="stylesheet" href="{% static 'store/style.css' %}">
-    </head>
-<body>
-    {% block body %}
-        <div class="row" style="margin: 10px;">
-            {% for product in item %}
-            <div class="col-md-3">
-                <div class="card" style="height: 555px; margin-top: 15px;">
-                    <img src="{{product.image}}" style="height: 355px; padding-top: 1px; padding-left: 60px; padding-right: 60px;">
-                    <div class="card-body">
-                        <div id = "nm{{product.id}}" class="product-title" style="height: 50px; margin: 5px;">{{product.name}}</div>
-                        <div id="price{{product.id}}"class="product-disc_price" style="margin-top: 5px; margin-left: 5px; margin-right: 5px;">{{product.discount_price}}</div>
-                        <div class="product-price" style = "text-decoration:line-through; margin-bottom: 5px; margin-left: 5px; margin-right: 5px;">
-                            <span class="a-price-symbol">₹</span>
-                            {{product.price}}
-                        </div>
-                        <div class="buttons">
-                            <a href="/{{ product.id }}" class="btn btn-warning">View</a>
-                            <button id="{{ product.id }}" class="btn btn-warning atc">Add to cart</button>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    {% block content %}
+    <section class="section-intro padding-y-sm">
+      <div class="container">
+        <div class="intro-banner-wrap">
+          <img
+            src="{% static 'images/banners/1.jpg' %}"
+            class="img-fluid rounded"
+          />
         </div>
+      </div>
+      <!-- container //  -->
+    </section>
+    <!-- ========================= SECTION MAIN END// ========================= -->
 
-        <div class="row" >
-            <div class="col" >
-                <ul class="pagination" style="justify-content: center; align-items: center;">
-                    {% if item.has_previous %}
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ item.previous_page_number }}">Previous</a>
-                        </li>
-                    {% endif %}
+    <!-- ========================= SECTION  ========================= -->
+    <section class="section-name padding-y-sm">
+      <div class="container">
+        <header class="section-heading">
+          <a href="./store.html" class="btn btn-outline-primary float-right"
+            >See all</a
+          >
+          <h3 class="section-title">Recently Found</h3>
+        </header>
+        <!-- sect-heading -->
 
-                    <li class="page-item active">
-                        <a class="page-link" href="?page={{ item.number }}">Current</a>
-                    </li>
+        <div class="row">
+          {% for prod in item %}
 
-                    {% if item.has_next %}
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ item.next_page_number }}">Next</a>
-                        </li>
-                    {% endif %}
-                </ul>
+          <div class="col-md-3">
+            <div class="card card-product-grid">
+              <a href="./product-detail.html" class="img-wrap">
+                <img src="{{ prod.image.url }}" />
+              </a>
+              <figcaption class="info-wrap">
+                <a href="./product-detail.html" class="title">{{ prod.name }}</a>
+                <!-- price-wrap.// -->
+              </figcaption>
             </div>
+          </div>
+          <!-- col.// -->
+          {% endfor %}
         </div>
+        <!-- row.// -->
+      </div>
+      <!-- container // -->
+    </section>
+    <!-- ========================= SECTION  END// ========================= -->
+
     {% endblock %}
-</body>
+  </body>
 </html>

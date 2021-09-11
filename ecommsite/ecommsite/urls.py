@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls.conf import include
 from store import views
+from django.conf import settings
+from django.conf.urls.static import static
+
 # from django.conf import settings
 # from django.conf.urls.static import static
 
@@ -25,7 +29,9 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('<int:id>/', views.detail, name='detail'),
     path('checkout/', views.checkout, name='checkout'),
-]
+    # path('all-items/', views.allitems, name='all-items'),
+    path('users/', include('users.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # urlpatterns = [
 #     # ... the rest of your URLconf goes here ...

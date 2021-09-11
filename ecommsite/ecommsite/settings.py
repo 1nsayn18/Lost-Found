@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'store',
+    'users',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -70,6 +71,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ecommsite.wsgi.application'
 
+AUTH_USER_MODEL = 'users.Account'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -119,8 +121,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = BASE_DIR /'static'
+STATICFILES_DIRS = [
+    'ecommsite/static',
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR /'media'
