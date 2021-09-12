@@ -29,7 +29,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('<int:id>/', views.detail, name='detail'),
     path('checkout/', views.checkout, name='checkout'),
-    # path('all-items/', views.allitems, name='all-items'),
+    path('all-items/', views.allitems, name='all-items'),
     path('users/', include('users.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
