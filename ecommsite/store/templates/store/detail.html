@@ -1,54 +1,40 @@
-{% extends 'store/base.html' %}
+{% extends 'store/base.html' %} {% load static %} {% block content %}
 
-
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
-<body>
-  {% block body %}
+<section class="section-content padding-y bg">
   <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-12">
-                        <img src="{{ item.image }}">
-                    </div>
-                </div>
+    <!-- ============================ COMPONENT 1 ================================= -->
+    <div class="card">
+      <div class="row no-gutters">
+        <aside class="col-md-6">
+          <article class="gallery-wrap">
+            <div class="img-big-wrap">
+              <a href="#"><img src="{{ item.image.url }}" /></a>
             </div>
+            <!-- img-big-wrap.// -->
+          </article>
+          <!-- gallery-wrap .end// -->
+        </aside>
+        <main class="col-md-6 border-left">
+          <article class="content-body">
+            <h2 class="title">{{ item.name }}</h2>
 
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-12">
-                        {{ item.name }}
-                    </div>
-                </div>
+            <p rows="20" cols="50">{{ item.description }}</p>
 
-                <div class="row">
-                    <div class="col-md-12">
-                        {{ item.discount_price }}
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        {{ item.price }}
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        {{ item.description }}
-                    </div>
-                </div>
-            </div>
-
-        </div>
+            <a href="{% url 'checkout' %}" class="btn btn-primary">
+              <span class="text">Claim</span>
+              <i class="fas fa-shopping-cart"></i>
+            </a>
+          </article>
+          <!-- product-info-aside .// -->
+        </main>
+        <!-- col.// -->
+      </div>
+      <!-- row.// -->
     </div>
-    {% endblock %}
-</body>
-</html>
+    <!-- card.// -->
+    <!-- ============================ COMPONENT 1 END .// ================================= -->
+  </div>
+  <!-- container .//  -->
+</section>
+
+{% endblock %}
