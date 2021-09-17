@@ -31,6 +31,7 @@ urlpatterns = [
     path('checkout/', views.checkout, name='checkout'),
     path('all-items/', views.allitems, name='all-items'),
     path('users/', include('users.urls')),
+    path('additem/', views.additem, name='additem'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # urlpatterns = [

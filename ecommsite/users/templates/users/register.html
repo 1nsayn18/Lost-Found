@@ -1,4 +1,6 @@
-{% extends 'store/base.html' %} {% block content %}
+{% extends 'store/base.html' %} 
+{% load static %}
+{% block content %}
 
 <section class="section-content padding-y">
   <!-- ============================ COMPONENT REGISTER   ================================= -->
@@ -19,6 +21,9 @@
         {% endif %}
 
       <header class="mb-4"><h4 class="card-title">Register</h4></header>
+      
+      <img src="{% static 'images/misc/register.png' %}" class="card-img-top" >
+      
       <form action="{% url 'register' %}" method="POST">
         {% csrf_token %}
 

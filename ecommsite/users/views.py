@@ -125,8 +125,6 @@ def resetpassword(request):
     else:       
         return render(request, 'users/resetpassword.html')
 
-    
-
 def forgotpassword(request):
     if request.method == 'POST':
         email = request.POST['email']
