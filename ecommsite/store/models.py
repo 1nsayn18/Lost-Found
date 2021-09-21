@@ -7,11 +7,11 @@ class product(models.Model):
     def __str__(self):
         return self.name
 
+    added_by = models.IntegerField()
     name = models.CharField(max_length=500)
-    # category = models.CharField(max_length=200)
+    category = models.CharField(max_length=200)
     description = models.TextField(max_length=10000)
     image = models.ImageField(upload_to = 'photos/product', blank = True)
-    # added_by = models.IntegerField()
     claimed = models.BooleanField(default=False)
     date_added = models.DateTimeField(auto_now_add=True)
 

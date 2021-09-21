@@ -4,6 +4,7 @@ from django.core.checks import messages
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from .models import product, Order
+from users.models import Account
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -28,6 +29,7 @@ def index(request):
 
 def detail(request, id):    
     item = product.objects.get(id=id)
+    user = Account.objects.get(id = item.added_by)
 
     #search code
     items = product.objects.all()
@@ -36,22 +38,32 @@ def detail(request, id):
         items = items.filter(name__icontains = item_name) | items.filter(category__icontains = item_name) 
         return render(request, 'store/index.html', {'item':items}) 
 
-    return render(request, 'store/detail.html', {'item':item})
+    context = {
+        'item':item,
+        'user':user 
+    }
 
-def allitems(request):
+    return render(request, 'store/detail.html', context)
+
+def allitems(request, cat=None):
+        
     item = product.objects.all().filter(claimed = False)
     categories = product.objects.values('category').filter(claimed = False).order_by('category').distinct()
+    
 
     #search code
     item_name = request.GET.get('item_name')
     if item_name != '' and item_name is not None:
         item = item.filter(name__icontains = item_name) | item.filter(category__icontains = item_name)      
 
+    if cat is not None:
+        item = item.filter(category = cat)
+
     #paginator code
-    paginator = Paginator(item, 20)
+    paginator = Paginator(item, 9)
     page = request.GET.get('page')
     item = paginator.get_page(page)
-
+    
     context = {
         'item':item,
         'categories':categories,
@@ -60,24 +72,25 @@ def allitems(request):
     return render(request, 'store/all.html', context)
 
 
-@login_required(login_url = 'login')
 def additem(request):
-    if request.method == 'POST':
-        prod = product()
-        prod.name = request.POST.get('name')
-        prod.description = request.POST.get('description')
-        # prod.category = request.POST.get('category')
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            prod = product()
+            prod.name = request.POST.get('name')
+            prod.description = request.POST.get('description')
+            prod.category = request.POST.get('category')
 
-        if len(request.FILES) != 0:
-            prod.image = request.FILES['image']
+            if len(request.FILES) != 0:
+                prod.image = request.FILES['image']
 
-        # prod.added_by = request.user.id
+            prod.added_by = request.user.id
 
-        prod.save()
-        messages.success(request, 'Item has been added. Thank you!')
-        return redirect('index')
-    
-    return render(request, 'store/additem.html')
+            prod.save()
+            return redirect('index')
+        
+        return render(request, 'store/additem.html')
+    else:
+        return redirect('login')
 
 def checkout(request):
     item = product.objects.all()

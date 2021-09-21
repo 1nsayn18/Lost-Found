@@ -32,6 +32,7 @@ urlpatterns = [
     path('all-items/', views.allitems, name='all-items'),
     path('users/', include('users.urls')),
     path('additem/', views.additem, name='additem'),
+    path('category=<str:cat>/', views.allitems, name='all-items'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # urlpatterns = [

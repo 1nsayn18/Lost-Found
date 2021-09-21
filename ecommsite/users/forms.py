@@ -32,3 +32,8 @@ class RegistrationForm(forms.ModelForm):
             raise forms.ValidationError(
                 "Password does not match!!"
             )
+        email = cleaned_data.get('email')
+        if "@iiitl.ac.in" not in email:
+            raise forms.ValidationError(
+                "Please use your college email id to register!!"
+            )

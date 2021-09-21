@@ -20,6 +20,8 @@
 
             <p rows="20" cols="50">{{ item.description }}</p>
 
+            <h2>Found by - {{ user.first_name }}</h2>
+
             <a href="{% url 'checkout' %}" class="btn btn-primary">
               <span class="text">Claim</span>
               <i class="fas fa-shopping-cart"></i>

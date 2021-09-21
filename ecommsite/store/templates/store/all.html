@@ -6,7 +6,7 @@
 <!-- ========================= SECTION PAGETOP ========================= -->
 <section class="section-pagetop bg">
     <div class="container">
-        <h2 class="title-page">All Items</h2>
+        <h2><a href="{% url 'all-items' %}">All Items</a></h2>
         
     </div> <!-- container //  -->
     </section>
@@ -33,7 +33,7 @@
                 <div class="card-body">
                     <ul class="list-menu">
                         {% for category in categories %}
-                            <li><a href="/{{ category.category }}">{{ category.category }}</a></li>
+                            <li><a href="/category={{ category.category }}">{{ category.category }}</a></li>
                         {% endfor %}
                     </ul>
                 </div> <!-- card-body.// -->
